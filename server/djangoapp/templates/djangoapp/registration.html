@@ -1,11 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% load static %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-    <body>
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    {% extends 'navbar.html' %} {% block content %}
     <!--Add a registration form here -->
-    </body>
+    <form
+      class="ml-auto mr-auto mt-5 mb-5"
+      style="width: 60%"
+      action="{% url 'djangoapp:registration' %}"
+      method="POST"
+    >
+      {% csrf_token %}
+      <h1 class="border-bottom pb-3 text-success">Sign up</h1>
+      <div class="form-group">
+        <label class="font-weight-bold float-left" for="username"
+          >User Name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          name="username"
+          placeholder="Enter User Name:"
+          aria-describedby="username"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label class="font-weight-bold float-left" for="firstname"
+          >First Name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="firstname"
+          name="firstname"
+          placeholder="Enter First Name:"
+          aria-describedby="firstname"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label class="font-weight-bold float-left" for="lastname"
+          >Last Name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="lastname"
+          name="lastname"
+          placeholder="Enter Last Name:"
+          aria-describedby="lastname"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label class="font-weight-bold float-left" for="password"
+          >Password</label
+        >
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          id="password"
+          placeholder="Enter Password:"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-warning">Sign up</button>
+    </form>
+
+    <!-- Footer -->
+    <footer class="pl-5 page-footer font-small blue pt-4 bg-dark">
+      <!-- Footer Links -->
+      <div class="container-fluid text-center text-md-left">
+        <!-- Grid row -->
+        <div class="row">
+          <!-- Grid column -->
+          <div class="col-md-6 mt-md-0 mt-3">
+            <!-- Content -->
+            <h5 class="text-warning">Dealership Review</h5>
+            <p class="text-light">One stop dealership reviews</p>
+          </div>
+          <!-- Grid column -->
+          <hr class="clearfix w-100 d-md-none pb-3" />
+          <!-- Grid column -->
+          <div class="col-md-3 mb-md-0 mb-3">
+            <!-- Links -->
+            <h5 class="text-light">About us</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="{% url 'djangoapp:about' %}" class="text-warning"
+                  >About us</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- Grid column -->
+          <div class="col-md-3 mb-md-0 mb-3">
+            <h5 class="text-light">Contact</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="{% url 'djangoapp:contact' %}" class="text-warning"
+                  >Contact us</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3 text-light">
+        © 2020 Copyright:
+        <a href="{% url 'djangoapp:index' %}" class="text-warning"
+          >Dealership Review</a
+        >
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+    {% endblock %}
+  </body>
 </html>

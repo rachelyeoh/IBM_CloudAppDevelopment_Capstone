@@ -2,7 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Dealership Review</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Dealership Review</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -17,41 +19,17 @@
     <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
   </head>
-
   <body>
-    <!--Add a nav bar here -->
-    {% extends 'navbar.html' %}
-    <!--Add a dealer table here -->
-    {% block content %}
-    <div class="container">
-      <table class="table" id="table" data-filter-control="true">
-        <thead>
-          <tr>
-            <th data-field="id">ID</th>
-            <th data-field="name">Dealer Name</th>
-            <th data-field="city">City</th>
-            <th data-field="address">Address</th>
-            <th data-field="zip">Zip</th>
-            <th data-field="state" data-filter-control="select">State</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for dealer in dealerships %}
-          <tr>
-            <td>{{dealer.id}}</td>
-            <td>
-              <a href="{% url 'djangoapp:dealer_details' dealer.id %}"
-                >{{dealer.full_name}}</a
-              >
-            </td>
-            <td>{{dealer.city}}</td>
-            <td>{{dealer.address}}</td>
-            <td>{{dealer.zip}}</td>
-            <td>{{dealer.state}}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+    {% extends 'navbar.html' %} {% block content %}
+    <div class="card text-center">
+      <div class="card-header">About us</div>
+      <div class="card-body">
+        <h1>
+          Welcome to Best Cars dealership, home to the best cars in North
+          America. We sell domestic and imported cars at reasonable prices.
+        </h1>
+      </div>
+      <div class="card-footer text-muted">Dealership Review</div>
     </div>
 
     <!-- Footer -->

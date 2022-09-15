@@ -17,41 +17,30 @@
     <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
   </head>
-
   <body>
-    <!--Add a nav bar here -->
-    {% extends 'navbar.html' %}
-    <!--Add a dealer table here -->
-    {% block content %}
-    <div class="container">
-      <table class="table" id="table" data-filter-control="true">
-        <thead>
-          <tr>
-            <th data-field="id">ID</th>
-            <th data-field="name">Dealer Name</th>
-            <th data-field="city">City</th>
-            <th data-field="address">Address</th>
-            <th data-field="zip">Zip</th>
-            <th data-field="state" data-filter-control="select">State</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for dealer in dealerships %}
-          <tr>
-            <td>{{dealer.id}}</td>
-            <td>
-              <a href="{% url 'djangoapp:dealer_details' dealer.id %}"
-                >{{dealer.full_name}}</a
-              >
-            </td>
-            <td>{{dealer.city}}</td>
-            <td>{{dealer.address}}</td>
-            <td>{{dealer.zip}}</td>
-            <td>{{dealer.state}}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+    {% extends 'navbar.html' %} {% block content %}
+    <div class="card text-center">
+      <div class="card-header">About us</div>
+      <div class="card-body">
+        <h1>Contact us</h1>
+        <p class="font-weight-bolder text-success">
+          telephone number:
+          <span class="font-weight-normal text-dark">0300000000</span>
+        </p>
+        <p class="font-weight-bolder text-success">
+          email address:
+          <span class="font-weight-normal text-dark"
+            >dealershipreview@gmail.com</span
+          >
+        </p>
+        <p class="font-weight-bolder text-success">
+          Company address:
+          <span class="font-weight-normal text-dark"
+            >No 3, Harvard drive, Landstone 510000 United States</span
+          >
+        </p>
+      </div>
+      <div class="card-footer text-muted">Dealership Review</div>
     </div>
 
     <!-- Footer -->

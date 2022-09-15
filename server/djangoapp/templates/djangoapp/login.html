@@ -2,57 +2,41 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Dealership Review</title>
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link
-      href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css"
-      rel="stylesheet"
-    />
-    <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
-    <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
   </head>
-
   <body>
-    <!--Add a nav bar here -->
-    {% extends 'navbar.html' %}
-    <!--Add a dealer table here -->
-    {% block content %}
-    <div class="container">
-      <table class="table" id="table" data-filter-control="true">
-        <thead>
-          <tr>
-            <th data-field="id">ID</th>
-            <th data-field="name">Dealer Name</th>
-            <th data-field="city">City</th>
-            <th data-field="address">Address</th>
-            <th data-field="zip">Zip</th>
-            <th data-field="state" data-filter-control="select">State</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for dealer in dealerships %}
-          <tr>
-            <td>{{dealer.id}}</td>
-            <td>
-              <a href="{% url 'djangoapp:dealer_details' dealer.id %}"
-                >{{dealer.full_name}}</a
-              >
-            </td>
-            <td>{{dealer.city}}</td>
-            <td>{{dealer.address}}</td>
-            <td>{{dealer.zip}}</td>
-            <td>{{dealer.state}}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
+    {% extends 'navbar.html' %} {% block content %}
+    <!-- Login form -->
+    <form action="{% url 'djangoapp:login' %}" method="post">
+      {% csrf_token %}
+      <div class="container">
+        <h1>Login</h1>
+        <div class="form-group">
+          <label for="username"><b>User Name</b></label>
+          <input
+            id="username"
+            class="form-control"
+            type="text"
+            placeholder="Enter User Name: "
+            name="username"
+            required
+          />
+          <label for="password"><b>Password</b></label>
+          <input
+            id="password"
+            class="form-control"
+            type="password"
+            placeholder="Enter Password: "
+            name="password"
+            required
+          />
+        </div>
+        <button class="btn btn-warning" type="submit">Login</button>
+      </div>
+    </form>
 
     <!-- Footer -->
     <footer class="pl-5 page-footer font-small blue pt-4 bg-dark">
