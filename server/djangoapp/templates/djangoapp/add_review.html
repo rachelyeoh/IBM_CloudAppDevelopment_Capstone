@@ -1,16 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% load static %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css"
+      rel="stylesheet"
+    />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-
-</head>
-    <body>
+  </head>
+  <body>
+    {% extends 'navbar.html' %} {% block content %}
     <!--Add review form here -->
-    </body>
+    {% if not user.is_authenticated %}
+    <h2 class="text-light text-center">
+      Please <a href="{% url 'djangoapp:login' %}">Sign In</a> or
+      <a href="{% url 'djangoapp:registration' %}">Sign Up</a> to leave a
+      review.
+    </h2>
+    {% else %}
+    <form
+      class="mt-5 mb-5"
+      action="{% url 'djangoapp:add_review' dealer_id %}"
+      method="post"
+    >
+      {% csrf_token %}
+      <div class="container bg-dark text-light p-5" style="border-radius: 25px">
+        <h2>Leave a review</h2>
+        <hr style="border: 2px solid white; border-radius: 2px" />
+        <br />
+        <div class="form-group">
+          <label for="content">Please tell us about your experience:</label>
+          <textarea
+            class="form-control"
+            id="content"
+            name="content"
+            rows="2"
+            required
+          ></textarea>
+        </div>
+        <br />
+        <div class="form-group">
+          <label class="form-check-label ml-4">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              onchange="toggle_more_info()"
+              name="purchasecheck"
+              id="purchasecheck"
+            />
+            Made vehicle purchase? <small>(optional)</small>
+          </label>
+        </div>
+        <div class="form-group" id="carinfo">
+          <label for="car">Select your car:</label>
+          <select name="car" id="car" class="form-select" required>
+            <option selected value="1">Sedan</option>
+            <option selected value="2">Coupe</option>
+            <option selected value="3">Sports</option>
+            <option selected value="4">Hatchback</option>
+            <option selected value="5">Van</option>
+            <option selected value="6">SUV</option>
+            <option selected value="7">Truck</option>
+          </select>
+        </div>
+        <div class="form-group" id="purchaseinfo">
+          <label for="purchasedate">Select your purchase date:</label>
+          <input
+            class="date-own form-control"
+            type="text"
+            name="purchasedate"
+            id="purchasedate"
+          />
+        </div>
+        <br />
+        <button class="btn btn-warning" type="submit">Submit</button>
+      </div>
+    </form>
+    {% endif %}
+
+    <!-- Footer -->
+    <footer class="pl-5 page-footer font-small blue pt-4 bg-dark">
+      <!-- Footer Links -->
+      <div class="container-fluid text-center text-md-left">
+        <!-- Grid row -->
+        <div class="row">
+          <!-- Grid column -->
+          <div class="col-md-6 mt-md-0 mt-3">
+            <!-- Content -->
+            <h5 class="text-warning">Dealership Review</h5>
+            <p class="text-light">One stop dealership reviews</p>
+          </div>
+          <!-- Grid column -->
+          <hr class="clearfix w-100 d-md-none pb-3" />
+          <!-- Grid column -->
+          <div class="col-md-3 mb-md-0 mb-3">
+            <!-- Links -->
+            <h5 class="text-light">About us</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="{% url 'djangoapp:about' %}" class="text-warning"
+                  >About us</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- Grid column -->
+          <div class="col-md-3 mb-md-0 mb-3">
+            <h5 class="text-light">Contact</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="{% url 'djangoapp:contact' %}" class="text-warning"
+                  >Contact us</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3 text-light">
+        © 2022 Copyright:
+        <a href="{% url 'djangoapp:index' %}" class="text-warning"
+          >Dealership Review</a
+        >
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+    {% endblock %}
+  </body>
+  <script type="text/javascript">
+    $(".date-own").datepicker({
+      format: "mm/dd/yyyy",
+    });
+  </script>
 </html>

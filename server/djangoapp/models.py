@@ -35,7 +35,7 @@ class CarModel(models.Model):
             ("truck","Truck")
     ]
     name = models.CharField(max_length=30,blank=False)
-    dealerId = models.IntegerField(blank=False)
+    dealer_id = models.IntegerField(blank=False)
     type = models.CharField(max_length=20, choices=VEHICLE_TYPE_CHOICES, default="sedan")
     year = models.DateField(null=True)
     carmake = models.ForeignKey(CarMake, on_delete=models.CASCADE)
@@ -49,6 +49,44 @@ class CarModel(models.Model):
                "Year: " + str(self.year)
 
 # <HINT> Create a plain Python class `CarDealer` to hold dealer data
+class CarDealer:
 
+    def __init__(self, address, city, full_name, id, lat, long, short_name, st, zip):
+        # Dealer address
+        self.address = address
+        # Dealer city
+        self.city = city
+        # Dealer Full Name
+        self.full_name = full_name
+        # Dealer id
+        self.id = id
+        # Location lat
+        self.lat = lat
+        # Location long
+        self.long = long
+        # Dealer short name
+        self.short_name = short_name
+        # Dealer state
+        self.st = st
+        # Dealer zip
+        self.zip = zip
+
+    def __str__(self):
+        return "Dealer name: " + self.full_name
 
 # <HINT> Create a plain Python class `DealerReview` to hold review data
+class DealerReview:
+    def __init__(self, dealership, id, name, purchase, review, car_make=None, car_model=None, car_year=None, purchase_date=None, sentiment="neutral"):
+        self.car_make = car_make
+        self.car_model = car_model
+        self.car_year = car_year
+        self.dealership = dealership
+        self.id = id  # The id of the review
+        self.name = name  # Name of the reviewer
+        self.purchase = purchase  # Did the reviewer purchase the car? bool
+        self.purchase_date = purchase_date
+        self.review = review  # The actual review text
+        self.sentiment = sentiment  # Watson NLU sentiment analysis of review
+
+    def __str__(self):
+        return "Reviewer: " + self.name + " Review: " + self.review
